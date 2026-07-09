@@ -31,66 +31,156 @@ border = "#D6E8FF"
 # -------------------------------------------------
 # CUSTOM CSS
 # -------------------------------------------------
-st.markdown(f"""
+# -------------------------------------------------
+# CALM BLUE THEME
+# -------------------------------------------------
+
+bg_color = "#F4F9FF"          # Page background
+card_color = "#FFFFFF"        # Cards
+sidebar_color = "#EAF4FF"     # Sidebar
+text_color = "#1E3A5F"        # Text
+accent = "#3B82F6"            # Primary blue
+accent_hover = "#2563EB"      # Hover blue
+border = "#D6E8FF"            # Borders
+
+st.markdown(
+    f"""
 <style>
 
+/* ---------------- APP ---------------- */
+
+html, body {{
+    background-color: {bg_color};
+}}
+
 .stApp {{
-    background: {bg_color};
+    background-color: {bg_color};
 }}
 
-section[data-testid="stSidebar"] {
+/* ---------------- SIDEBAR ---------------- */
+
+section[data-testid="stSidebar"] {{
     background-color: {sidebar_color};
-}
-
-h1,h2,h3,h4,h5,h6,p,span,label {{
-    color:{text_color};
+    border-right: 1px solid {border};
 }}
 
-div[data-testid="stExpander"] {{
-    background:white;
-    border-radius:12px;
-    border:1px solid {border};
+/* ---------------- TEXT ---------------- */
+
+h1, h2, h3, h4, h5, h6,
+p, span, label,
+div[data-testid="stMarkdownContainer"],
+div[data-testid="stMetricLabel"],
+div[data-testid="stMetricValue"] {{
+    color: {text_color} !important;
 }}
+
+/* ---------------- TITLES ---------------- */
+
+h1 {{
+    text-align: center;
+    font-weight: 700;
+}}
+
+/* ---------------- BUTTONS ---------------- */
 
 div.stButton > button {{
-    background:{accent};
-    color:white;
-    border:none;
-    border-radius:12px;
-    height:50px;
-    font-weight:600;
+    width: 100%;
+    height: 50px;
+    border-radius: 12px;
+    border: none;
+    background-color: {accent};
+    color: white;
+    font-size: 17px;
+    font-weight: 600;
 }}
 
 div.stButton > button:hover {{
-    background:{accent_hover};
+    background-color: {accent_hover};
+    color: white;
 }}
 
+/* ---------------- LINK BUTTONS ---------------- */
+
 div[data-testid="stLinkButton"] button {{
-    background:white;
-    color:{text_color};
-    border:1px solid {border};
-    border-radius:10px;
+    width: 100%;
+    border-radius: 10px;
+    background-color: white;
+    color: {text_color};
+    border: 1px solid {border};
+    font-weight: 600;
 }}
 
 div[data-testid="stLinkButton"] button:hover {{
-    background:{accent};
-    color:white;
+    background-color: {accent};
+    color: white;
 }}
+
+div[data-testid="stLinkButton"] button * {{
+    color: inherit !important;
+}}
+
+/* ---------------- FILE UPLOADER ---------------- */
 
 [data-testid="stFileUploader"] {{
-    border:2px dashed {accent};
-    border-radius:15px;
-    background:white;
+    background-color: white;
+    border: 2px dashed {accent};
+    border-radius: 15px;
+    padding: 10px;
 }}
 
+[data-testid="stFileUploader"] * {{
+    color: {text_color} !important;
+}}
+
+[data-testid="stFileUploader"] button {{
+    background-color: {accent} !important;
+    color: white !important;
+    border-radius: 10px !important;
+}}
+
+[data-testid="stFileUploader"] button:hover {{
+    background-color: {accent_hover} !important;
+}}
+
+/* ---------------- EXPANDERS ---------------- */
+
+div[data-testid="stExpander"] {{
+    background-color: white;
+    border-radius: 12px;
+    border: 1px solid {border};
+}}
+
+div[data-testid="stExpander"] * {{
+    color: {text_color};
+}}
+
+/* ---------------- METRICS ---------------- */
+
+div[data-testid="stMetric"] {{
+    background-color: white;
+    border: 1px solid {border};
+    border-radius: 12px;
+    padding: 10px;
+}}
+
+/* ---------------- PROGRESS BAR ---------------- */
+
+div[data-testid="stProgressBar"] > div {{
+    background-color: {accent};
+}}
+
+/* ---------------- FOOTER ---------------- */
+
 .footer {{
-    color:#64748B;
-    text-align:center;
-    font-size:14px;
+    text-align: center;
+    color: #64748B;
+    font-size: 14px;
 }}
 
 </style>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True
+)
 # -------------------------------------------------
 # SIDEBAR
 # -------------------------------------------------
