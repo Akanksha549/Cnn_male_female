@@ -323,7 +323,7 @@ if uploaded_file:
                 data=[
                     go.Bar(
                         x=["male", "female"],
-                        y=[female_prob, male_prob],
+                        y=[male_prob, female_prob],
                         text=[
                             f"{female_prob*100:.1f}%",
                             f"{male_prob*100:.1f}%"
