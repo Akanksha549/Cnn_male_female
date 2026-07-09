@@ -79,7 +79,7 @@ div.stButton>button {{
 # SIDEBAR
 # -------------------------------------------------
 with st.sidebar:
-    st.title("⚙️ Settings")
+    st.title("OVERVIEW")
 
     st.markdown("---")
 
@@ -101,7 +101,6 @@ with st.sidebar:
         "Upload a face image and let the CNN model predict "
         "whether it belongs to a Male or Female."
     )
-
 # -------------------------------------------------
 # MAIN TITLE
 # -------------------------------------------------
@@ -316,20 +315,6 @@ with st.expander("⚙️ Technologies Used"):
 # FOOTER
 # -------------------------------------------------
 st.divider()
-
-col1, col2 = st.columns(2)
-
-with col1:
-    st.link_button(
-        "💻 GitHub",
-        "https://github.com/Akanksha549/"
-    )
-
-with col2:
-    st.link_button(
-        "🔗 LinkedIn",
-        "https://www.linkedin.com/in/akanksha-mishra-7894912bb"
-    )
 
 st.markdown(
     """
