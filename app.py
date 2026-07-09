@@ -271,12 +271,16 @@ if uploaded_file:
 
                 img = preprocess_image(image)
 
-                prediction = model.predict(img, verbose=0)[0][0]
+                prediction = float(model.predict(img, verbose=0)[0][0])
 
                 end = time.time()
 
                 inference = end - start
 
+            #Debug info
+            st.write("Raw Prediction Value:", prediction)
+
+            
             if prediction >= 0.5:
                 label = " Male"
                 confidence = prediction
