@@ -15,21 +15,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-st.markdown(f"""
-<style>
-body {{
-    color: {text_color};
-}}
 
-[data-testid="stAppViewContainer"] {{
-    color: {text_color};
-}}
-
-[data-testid="stSidebar"] * {{
-    color: {text_color} !important;
-}}
-</style>
-""", unsafe_allow_html=True)
 # -------------------------------------------------
 # THEME TOGGLE
 # -------------------------------------------------
