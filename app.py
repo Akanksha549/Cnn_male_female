@@ -322,7 +322,7 @@ if uploaded_file:
             fig = go.Figure(
                 data=[
                     go.Bar(
-                        x=["Female", "Male"],
+                        x=["male", "female"],
                         y=[female_prob, male_prob],
                         text=[
                             f"{female_prob*100:.1f}%",
