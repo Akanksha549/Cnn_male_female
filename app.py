@@ -336,7 +336,7 @@ if uploaded_file:
 
             fig.update_layout(
                 height=350,
-                template="plotly_white" if not dark_mode else "plotly_dark",
+                template="plotly_white"
                 margin=dict(l=20, r=20, t=40, b=20),
                 xaxis_title="Class",
                 yaxis_title="Probability",
