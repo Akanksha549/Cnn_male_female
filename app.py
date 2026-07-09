@@ -282,10 +282,10 @@ if uploaded_file:
 
             
             if prediction >= 0.5:
-                label = " Male"
+                label = " Female"
                 confidence = prediction
             else:
-                label = " Female"
+                label = " Male"
                 confidence = 1 - prediction
 
             st.success(f"Prediction: **{label}**")
