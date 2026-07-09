@@ -16,70 +16,86 @@ st.set_page_config(
 )
 
 
-# -------------------------------------------------
-# THEME TOGGLE
-# -------------------------------------------------
-dark_mode = st.sidebar.toggle("🌙 Dark Mode", value=False)
 
-if dark_mode:
-    bg_color = "#0F172A"
-    card_color = "#1E293B"
-    text_color = "#F8FAFC"
-    accent = "#60A5FA"
-else:
-    bg_color = "#F8FAFC"
-    card_color = "#FFFFFF"
-    text_color = "#1E293B"
-    accent = "#2563EB"
+# -------------------------------------------------
+# APP THEME
+# -------------------------------------------------
+bg_color = "#F4F9FF"
+card_color = "#FFFFFF"     
+sidebar_color = "#EAF4FF"  
+text_color = "#1E3A5F"     
+accent = "#3B82F6"          
+accent_hover = "#2563EB"   
+border = "#D6E8FF"         
 
 # -------------------------------------------------
 # CUSTOM CSS
 # -------------------------------------------------
-st.markdown(
-    f"""
+st.markdown(f"""
 <style>
 
 .stApp {{
-    background-color:{bg_color};
+    background: {bg_color};
+}}
+
+section[data-testid="stSidebar"] {
+    background-color: {sidebar_color};
+}
+
+h1,h2,h3,h4,h5,h6,p,span,label {{
     color:{text_color};
 }}
 
-section[data-testid="stSidebar"] {{
-    background-color:{card_color};
+div[data-testid="stExpander"] {{
+    background:white;
+    border-radius:12px;
+    border:1px solid {border};
 }}
 
-h1,h2,h3,h4,h5,h6,p,label,span,div {{
-    color:{text_color} !important;
-}}
-
-[data-testid="stMarkdownContainer"] {{
-    color:{text_color} !important;
-}}
-
-[data-testid="stMetricValue"],
-[data-testid="stMetricLabel"] {{
-    color:{text_color} !important;
-}}
-
-.stExpander {{
-    background:{card_color};
-}}
-
-div.stButton>button {{
+div.stButton > button {{
     background:{accent};
     color:white;
     border:none;
+    border-radius:12px;
+    height:50px;
+    font-weight:600;
+}}
+
+div.stButton > button:hover {{
+    background:{accent_hover};
+}}
+
+div[data-testid="stLinkButton"] button {{
+    background:white;
+    color:{text_color};
+    border:1px solid {border};
+    border-radius:10px;
+}}
+
+div[data-testid="stLinkButton"] button:hover {{
+    background:{accent};
+    color:white;
+}}
+
+[data-testid="stFileUploader"] {{
+    border:2px dashed {accent};
+    border-radius:15px;
+    background:white;
+}}
+
+.footer {{
+    color:#64748B;
+    text-align:center;
+    font-size:14px;
 }}
 
 </style>
-""",
-    unsafe_allow_html=True,
-)
+""", unsafe_allow_html=True)
 # -------------------------------------------------
 # SIDEBAR
 # -------------------------------------------------
 with st.sidebar:
-    st.title("OVERVIEW")
+    st.title("📘 Overview")
 
     st.markdown("---")
 
@@ -223,7 +239,7 @@ if uploaded_file:
                             f"{male_prob*100:.1f}%"
                         ],
                         textposition="auto",
-                        marker_color=["#EC4899", "#3B82F6"]
+                       marker_color=["#93C5FD", "#2563EB"]
                     )
                 ]
             )
