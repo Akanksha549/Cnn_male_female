@@ -15,6 +15,21 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+st.markdown(f"""
+<style>
+body {{
+    color: {text_color};
+}}
+
+[data-testid="stAppViewContainer"] {{
+    color: {text_color};
+}}
+
+[data-testid="stSidebar"] * {{
+    color: {text_color} !important;
+}}
+</style>
+""", unsafe_allow_html=True)
 # -------------------------------------------------
 # THEME TOGGLE
 # -------------------------------------------------
@@ -36,61 +51,44 @@ else:
 # -------------------------------------------------
 st.markdown(
     f"""
-    <style>
+<style>
 
-    html, body, [class*="css"] {{
-        font-family: 'Segoe UI', sans-serif;
-        background-color: {bg_color};
-        color: {text_color};
-    }}
+.stApp {{
+    background-color:{bg_color};
+    color:{text_color};
+}}
 
-    .stApp {{
-        background-color: {bg_color};
-    }}
+section[data-testid="stSidebar"] {{
+    background-color:{card_color};
+}}
 
-    h1 {{
-        text-align: center;
-        color: {text_color};
-        font-weight: 700;
-    }}
+h1,h2,h3,h4,h5,h6,p,label,span,div {{
+    color:{text_color} !important;
+}}
 
-    .glass {{
-        background: {card_color};
-        padding: 25px;
-        border-radius: 18px;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-        border: 1px solid rgba(255,255,255,0.1);
-        margin-bottom: 20px;
-    }}
+[data-testid="stMarkdownContainer"] {{
+    color:{text_color} !important;
+}}
 
-    .footer {{
-        text-align: center;
-        font-size: 14px;
-        color: gray;
-        padding-top: 30px;
-    }}
+[data-testid="stMetricValue"],
+[data-testid="stMetricLabel"] {{
+    color:{text_color} !important;
+}}
 
-    div.stButton > button {{
-        width: 100%;
-        border-radius: 12px;
-        height: 50px;
-        font-size: 18px;
-        font-weight: 600;
-        background-color: {accent};
-        color: white;
-        border: none;
-    }}
+.stExpander {{
+    background:{card_color};
+}}
 
-    div.stButton > button:hover {{
-        background-color: #1D4ED8;
-        transition: 0.3s;
-    }}
+div.stButton>button {{
+    background:{accent};
+    color:white;
+    border:none;
+}}
 
-    </style>
-    """,
-    unsafe_allow_html=True
+</style>
+""",
+    unsafe_allow_html=True,
 )
-
 # -------------------------------------------------
 # SIDEBAR
 # -------------------------------------------------
