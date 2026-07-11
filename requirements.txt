@@ -1,5 +1,7 @@
 streamlit==1.46.1
 tensorflow==2.19.0
-numpy==2.1.3
-Pillow==11.2.1
-plotly==6.1.2
+numpy
+Pillow
+plotly
+h5py
+protobuf<6
