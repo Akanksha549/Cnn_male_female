@@ -11,7 +11,7 @@ import time
 
 st.set_page_config(
     page_title="Male/Female Eye Classifier",
-    page_icon="👁️",
+    page_icon=" ",
     layout="wide"
 )
 
@@ -275,3 +275,174 @@ if uploaded_file is not None:
             }
 
             st.json(summary)
+
+# ---------------------------------------------------
+# ABOUT PROJECT
+# ---------------------------------------------------
+
+st.divider()
+
+tab1, tab2, tab3, tab4 = st.tabs(
+    [
+        "📘 About",
+        "📂 Dataset",
+        "🧠 Model",
+        "⚙️ Technologies"
+    ]
+)
+
+# ---------------------------------------------------
+# ABOUT
+# ---------------------------------------------------
+
+with tab1:
+
+    st.markdown("""
+## 👁️ Male & Female Eye Classification
+
+This project is a **Deep Learning** web application that predicts
+whether an uploaded **human eye image** belongs to a **Male** or
+**Female** using a trained **Convolutional Neural Network (CNN)**.
+
+### ✨ Features
+
+- Upload Eye Image
+- CNN-based Prediction
+- Real-time Inference
+- Confidence Score
+- Probability Visualization
+- Responsive Streamlit Interface
+
+### 🎯 Objective
+
+To demonstrate how Convolutional Neural Networks can perform
+binary image classification using eye images.
+
+""")
+
+# ---------------------------------------------------
+# DATASET
+# ---------------------------------------------------
+
+with tab2:
+
+    st.markdown("""
+## 📂 Dataset Information
+
+The model was trained using a labeled eye image dataset
+containing images from male and female subjects.
+
+### Preprocessing
+
+- RGB Images
+- Image resized to **128 × 128**
+- Pixel values normalized between **0 and 1**
+- Binary Classification
+
+### Classes
+
+| Label | Class |
+|-------|--------|
+| 0 | Female Eyes |
+| 1 | Male Eyes |
+
+""")
+
+# ---------------------------------------------------
+# MODEL DETAILS
+# ---------------------------------------------------
+
+with tab3:
+
+    st.markdown("""
+## 🧠 CNN Model
+
+### Framework
+
+- TensorFlow
+- Keras
+
+### Architecture
+
+- Convolution Layers
+- MaxPooling
+- Dense Layers
+- Sigmoid Output
+
+### Input Shape
+
+**128 × 128 × 3**
+
+### Output
+
+Binary Classification
+
+Prediction Value
+
+- **0 → Female**
+- **1 → Male**
+
+""")
+
+# ---------------------------------------------------
+# TECHNOLOGIES
+# ---------------------------------------------------
+
+with tab4:
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+
+        st.markdown("""
+### Programming
+
+- Python
+- NumPy
+- Pillow
+""")
+
+    with col2:
+
+        st.markdown("""
+### Libraries
+
+- TensorFlow
+- Keras
+- Plotly
+- Streamlit
+""")
+
+# ---------------------------------------------------
+# FOOTER
+# ---------------------------------------------------
+
+st.divider()
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.info("🧠 **Model:** CNN")
+
+with col2:
+    st.info("📐 **Input Size:** 128 × 128")
+
+with col3:
+    st.info("⚡ **Deployment:** Streamlit")
+
+st.markdown("---")
+
+st.markdown(
+"""
+<div style="text-align:center">
+
+### 👁️ Male & Female Eye Classification using CNN
+
+Built with ❤️ by <b>Akanksha Mishra</b>
+
+TensorFlow • Keras • Streamlit
+
+</div>
+""",
+unsafe_allow_html=True
+)
