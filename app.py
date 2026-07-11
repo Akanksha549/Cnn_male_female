@@ -28,18 +28,158 @@ border = "#CBD5E1"
 # ----------------------------------------------------
 # CUSTOM CSS
 # ----------------------------------------------------
-st.markdown(
-f"""
+st.markdown(f"""
 <style>
 
-/* =====================================================
+/* ==========================
 MAIN APP
-===================================================== */
+========================== */
 
 .stApp {{
     background-color: {bg_color};
-    color: {text_color};
 }}
+
+/* ==========================
+SIDEBAR
+========================== */
+
+section[data-testid="stSidebar"] {{
+    background-color: {sidebar_color};
+    border-right:1px solid {border};
+}}
+
+section[data-testid="stSidebar"] * {{
+    color:{text_color} !important;
+}}
+
+/* ==========================
+HEADINGS
+========================== */
+
+h1,h2,h3,h4,h5,h6{{
+    color:{text_color} !important;
+}}
+
+p,label,span{{
+    color:{text_color} !important;
+}}
+
+div[data-testid="stMarkdownContainer"] * {{
+    color:{text_color} !important;
+}}
+
+/* ==========================
+BUTTON
+========================== */
+
+.stButton>button{{
+    background:{accent};
+    color:white;
+    border:none;
+    border-radius:12px;
+    height:50px;
+    font-weight:600;
+}}
+
+.stButton>button:hover{{
+    background:{accent_hover};
+    color:white;
+}}
+
+/* ==========================
+LINK BUTTON
+========================== */
+
+div[data-testid="stLinkButton"] button{{
+    background:{card_color};
+    color:{text_color};
+    border:1px solid {border};
+}}
+
+div[data-testid="stLinkButton"] button *{{
+    color:{text_color} !important;
+}}
+
+/* ==========================
+FILE UPLOADER
+========================== */
+
+[data-testid="stFileUploader"]{{
+    background:{card_color};
+    border:2px dashed {accent};
+    border-radius:12px;
+}}
+
+[data-testid="stFileUploader"] *{{
+    color:{text_color} !important;
+}}
+
+/* ==========================
+EXPANDERS
+========================== */
+
+div[data-testid="stExpander"]{{
+    background:{card_color};
+    border:1px solid {border};
+    border-radius:12px;
+}}
+
+div[data-testid="stExpander"] *{{
+    color:{text_color} !important;
+}}
+
+/* ==========================
+METRICS
+========================== */
+
+div[data-testid="stMetric"]{{
+    background:{card_color};
+    border:1px solid {border};
+    border-radius:12px;
+    padding:10px;
+}}
+
+div[data-testid="stMetricLabel"]{{
+    color:{text_color} !important;
+}}
+
+div[data-testid="stMetricValue"]{{
+    color:{accent} !important;
+    font-weight:bold;
+}}
+
+/* ==========================
+INFO BOXES
+========================== */
+
+div[data-baseweb="notification"] *{{
+    color:{text_color} !important;
+}}
+
+/* ==========================
+INPUTS
+========================== */
+
+input, textarea {{
+    color:{text_color} !important;
+}}
+
+/* ==========================
+PROGRESS BAR
+========================== */
+
+div[data-testid="stProgressBar"] > div{{
+    background:{accent};
+}}
+
+.footer{{
+    color:#64748B;
+    text-align:center;
+}}
+
+</style>
+""", unsafe_allow_html=True)
+
 
 /* =====================================================
 SIDEBAR
