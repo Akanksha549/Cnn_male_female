@@ -5,382 +5,124 @@ from PIL import Image
 import plotly.graph_objects as go
 import time
 
-# ----------------------------------------------------
-# PAGE CONFIGURATION
-# ----------------------------------------------------
+# ---------------------------------------------------
+# PAGE CONFIG
+# ---------------------------------------------------
+
 st.set_page_config(
     page_title="Male/Female Eye Classifier",
     page_icon="👁️",
-    layout="wide",
-    initial_sidebar_state="expanded"
+    layout="wide"
 )
 
-# ----------------------------------------------------
-# COLORS
-# ----------------------------------------------------
-bg_color = "#F5F7FB"
-card_color = "#FFFFFF"
-sidebar_color = "#E8F0FE"
-text_color = "#0F172A"
-accent = "#3B82F6"
-accent_hover = "#2563EB"
-border = "#CBD5E1"
-# ----------------------------------------------------
-# CUSTOM CSS
-# ----------------------------------------------------
-st.markdown(f"""
-<style>
-
-/* ==========================
-MAIN APP
-========================== */
-
-.stApp {{
-    background-color: {bg_color};
-}}
-
-/* ==========================
-SIDEBAR
-========================== */
-
-section[data-testid="stSidebar"] {{
-    background-color: {sidebar_color};
-    border-right:1px solid {border};
-}}
-
-section[data-testid="stSidebar"] * {{
-    color:{text_color} !important;
-}}
-
-/* ==========================
-HEADINGS
-========================== */
-
-h1,h2,h3,h4,h5,h6{{
-    color:{text_color} !important;
-}}
-
-p,label,span{{
-    color:{text_color} !important;
-}}
-
-div[data-testid="stMarkdownContainer"] * {{
-    color:{text_color} !important;
-}}
-
-/* ==========================
-BUTTON
-========================== */
-
-.stButton>button{{
-    background:{accent};
-    color:white;
-    border:none;
-    border-radius:12px;
-    height:50px;
-    font-weight:600;
-}}
-
-.stButton>button:hover{{
-    background:{accent_hover};
-    color:white;
-}}
-
-/* ==========================
-LINK BUTTON
-========================== */
-
-div[data-testid="stLinkButton"] button{{
-    background:{card_color};
-    color:{text_color};
-    border:1px solid {border};
-}}
-
-div[data-testid="stLinkButton"] button *{{
-    color:{text_color} !important;
-}}
-
-/* ==========================
-FILE UPLOADER
-========================== */
-
-[data-testid="stFileUploader"]{{
-    background:{card_color};
-    border:2px dashed {accent};
-    border-radius:12px;
-}}
-
-[data-testid="stFileUploader"] *{{
-    color:{text_color} !important;
-}}
-
-/* ==========================
-EXPANDERS
-========================== */
-
-div[data-testid="stExpander"]{{
-    background:{card_color};
-    border:1px solid {border};
-    border-radius:12px;
-}}
-
-div[data-testid="stExpander"] *{{
-    color:{text_color} !important;
-}}
-
-/* ==========================
-METRICS
-========================== */
+# ---------------------------------------------------
+# LOAD MODEL
+# ---------------------------------------------------
 
-div[data-testid="stMetric"]{{
-    background:{card_color};
-    border:1px solid {border};
-    border-radius:12px;
-    padding:10px;
-}}
+@st.cache_resource
+def load_model():
+    return tf.keras.models.load_model("male_female_eye_model.keras")
 
-div[data-testid="stMetricLabel"]{{
-    color:{text_color} !important;
-}}
+model = load_model()
 
-div[data-testid="stMetricValue"]{{
-    color:{accent} !important;
-    font-weight:bold;
-}}
+IMG_SIZE = 128
 
-/* ==========================
-INFO BOXES
-========================== */
+# ---------------------------------------------------
+# IMAGE PREPROCESSING
+# ---------------------------------------------------
 
-div[data-baseweb="notification"] *{{
-    color:{text_color} !important;
-}}
+def preprocess_image(image):
 
-/* ==========================
-INPUTS
-========================== */
+    image = image.convert("RGB")
+    image = image.resize((IMG_SIZE, IMG_SIZE))
 
-input, textarea {{
-    color:{text_color} !important;
-}}
+    img = np.array(image) / 255.0
+    img = np.expand_dims(img, axis=0)
 
-/* ==========================
-PROGRESS BAR
-========================== */
+    return img
 
-div[data-testid="stProgressBar"] > div{{
-    background:{accent};
-}}
+# ---------------------------------------------------
+# SIDEBAR
+# ---------------------------------------------------
 
-.footer{{
-    color:#64748B;
-    text-align:center;
-}}
+with st.sidebar:
 
-</style>
-""", unsafe_allow_html=True)
+    st.image(
+        "https://img.icons8.com/color/96/artificial-intelligence.png",
+        width=70
+    )
 
+    st.title("Eye Classifier")
 
-/* =====================================================
-SIDEBAR
-===================================================== */
+    st.markdown("---")
 
-section[data-testid="stSidebar"] {{
-    background-color: {sidebar_color};
-    border-right: 1px solid {border};
-}}
+    st.write(
+        """
+### About
 
-section[data-testid="stSidebar"] * {{
-    color: {text_color} !important;
-}}
+This application predicts whether the uploaded
+eye image belongs to a
 
-/* =====================================================
-HEADINGS
-===================================================== */
+- 👨 Male
+- 👩 Female
 
-h1,h2,h3,h4,h5,h6 {{
-    color: {text_color} !important;
-    font-weight:700;
-}}
+using a CNN model.
+"""
+    )
 
-p,label,span {{
-    color: {text_color} !important;
-}}
+    st.markdown("---")
 
-/* =====================================================
-MARKDOWN
-===================================================== */
+    st.subheader("Developer")
 
-div[data-testid="stMarkdownContainer"] {{
-    color:{text_color} !important;
-}}
+    st.link_button(
+        "💻 GitHub",
+        "https://github.com/Akanksha549/"
+    )
 
-div[data-testid="stMarkdownContainer"] * {{
-    color:{text_color} !important;
-}}
+    st.link_button(
+        "🔗 LinkedIn",
+        "https://www.linkedin.com/in/akanksha-mishra-7894912bb"
+    )
 
-/* =====================================================
-BUTTONS
-===================================================== */
+    st.markdown("---")
 
-div.stButton > button {{
+    st.success("TensorFlow • Keras • Streamlit")
 
-    width:100%;
-    height:50px;
+# ---------------------------------------------------
+# TITLE
+# ---------------------------------------------------
 
-    background:{accent};
-    color:white;
+st.title("👁️ Male & Female Eye Classification")
 
-    border:none;
-
-    border-radius:12px;
-
-    font-size:17px;
-
-    font-weight:bold;
-}}
-
-div.stButton > button:hover {{
-
-    background:{accent_hover};
-    color:white;
-
-}}
-
-/* =====================================================
-LINK BUTTONS
-===================================================== */
-
-div[data-testid="stLinkButton"] button {{
-
-    background:{card_color};
-
-    color:white;
-
-    border:1px solid {border};
-
-}}
-
-div[data-testid="stLinkButton"] button *{{
-    color:white !important;
-}}
-
-/* =====================================================
-FILE UPLOADER
-===================================================== */
-
-[data-testid="stFileUploader"] {{
-
-    background:{card_color};
-
-    border:2px dashed {accent};
-
-    border-radius:15px;
-
-}}
-
-[data-testid="stFileUploader"] * {{
-
-    color:white !important;
-
-}}
-
-/* =====================================================
-EXPANDERS
-===================================================== */
-
-div[data-testid="stExpander"] {{
-
-    background:{card_color};
-
-    border-radius:15px;
-
-    border:1px solid {border};
-
-}}
-
-div[data-testid="stExpander"] * {{
-
-    color:white !important;
-
-}}
-
-/* =====================================================
-METRICS
-===================================================== */
-
-div[data-testid="stMetric"] {{
-
-    background:{card_color};
-
-    border:1px solid {border};
-
-    border-radius:15px;
-
-    padding:15px;
-
-}}
-
-div[data-testid="stMetric"] * {{
-
-    color:white !important;
-
-}}
-
-/* =====================================================
-INFO / SUCCESS / WARNING
-===================================================== */
-
-div[data-baseweb="notification"] * {{
-
-    color:white !important;
-
-}}
-
-.stAlert *{{
-    color:white !important;
-}}
-
-/* =====================================================
-PROGRESS BAR
-===================================================== */
-
-div[data-testid="stProgressBar"] > div {{
-    background:{accent};
-}}
-
-/* =====================================================
-TEXT INPUT
-===================================================== */
-
-input {{
-    color:white !important;
-}}
-
-textarea {{
-    color:white !important;
-}}
-
-/* =====================================================
-PLOTLY
-===================================================== */
-
-.js-plotly-plot {{
-    background:{card_color};
-    border-radius:12px;
-}}
-
-/* =====================================================
-FOOTER
-===================================================== */
-
-.footer{{
-    text-align:center;
-    color:#CBD5E1;
-    font-size:14px;
-}}
-
-</style>
-""",
-unsafe_allow_html=True
+st.caption(
+    "Deep Learning based Gender Classification using Human Eye Images"
 )
+
+st.divider()
+
+left, right = st.columns([1,1])
+
+with left:
+
+    st.subheader("📂 Upload Eye Image")
+
+    uploaded_file = st.file_uploader(
+        "",
+        type=["jpg","jpeg","png"]
+    )
+
+with right:
+
+    st.info(
+        """
+### Instructions
+
+✔ Upload a clear eye image
+
+✔ JPG / PNG / JPEG
+
+✔ Image will be resized automatically
+
+✔ Prediction takes less than 1 second
+"""
+    )
