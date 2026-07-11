@@ -18,14 +18,13 @@ st.set_page_config(
 # ----------------------------------------------------
 # COLORS
 # ----------------------------------------------------
-bg_color = "#0F172A"         # Dark Navy
-card_color = "#1E293B"       # Card Background
-sidebar_color = "#111827"    # Sidebar
-text_color = "#F8FAFC"       # White
-accent = "#3B82F6"           # Blue
+bg_color = "#F5F7FB"
+card_color = "#FFFFFF"
+sidebar_color = "#E8F0FE"
+text_color = "#0F172A"
+accent = "#3B82F6"
 accent_hover = "#2563EB"
-border = "#334155"
-
+border = "#CBD5E1"
 # ----------------------------------------------------
 # CUSTOM CSS
 # ----------------------------------------------------
